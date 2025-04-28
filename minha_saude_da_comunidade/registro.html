@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Saúde</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Registro de Saúde</h1>
+    <form id="formRegistro">
+        <label>Pressão: <input type="text" name="pressao" id="pressao" required></label><br>
+        <label>Peso: <input type="text" name="peso" id="peso" required></label><br>
+        <label>Glicemia: <input type="text" name="glicemia" id="glicemia" required></label><br>
+        <button type="submit">Registrar</button>
+    </form>
+
+    <script>
+        document.getElementById('formRegistro').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio do formulário e o recarregamento da página
+
+            // Captura os valores do formulário
+            const pressao = document.getElementById('pressao').value;
+            const peso = document.getElementById('peso').value;
+            const glicemia = document.getElementById('glicemia').value;
+
+            // Cria um objeto de registro
+            const registro = {
+                pressao: pressao,
+                peso: peso,
+                glicemia: glicemia,
+                data: new Date().toLocaleString() // Data do registro
+            };
+
+            // Obtém os registros do localStorage ou cria um array vazio
+            let registros = JSON.parse(localStorage.getItem('registros')) || [];
+
+            // Adiciona o novo registro
+            registros.push(registro);
+
+            // Salva novamente os registros no localStorage
+            localStorage.setItem('registros', JSON.stringify(registros));
+
+            // Limpa o formulário
+            document.getElementById('formRegistro').reset();
+            alert("Registro salvo com sucesso!");
+        });
+    </script>
+</body>
+</html>

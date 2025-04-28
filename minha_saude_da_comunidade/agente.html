@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Página do Agente de Saúde</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Pacientes Cadastrados</h1>
+    <table id="tabelaPacientes">
+        <tr><th>Nome</th><th>Idade</th><th>Contato</th></tr>
+    </table>
+
+    <script>
+        const tabela = document.getElementById('tabelaPacientes');
+        const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+
+        pacientes.forEach(p => {
+            const row = tabela.insertRow();
+            row.innerHTML = `<td>${p.nome}</td><td>${p.idade}</td><td>${p.contato}</td>`;
+        });
+    </script>
+</body>
+</html>

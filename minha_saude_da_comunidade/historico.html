@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de Registros</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Histórico de Registros</h1>
+    <table id="tabelaHistorico">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Pressão</th>
+                <th>Peso</th>
+                <th>Glicemia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Registros serão exibidos aqui -->
+        </tbody>
+    </table>
+
+    <script>
+        window.onload = function() {
+            // Obtém os registros armazenados no localStorage
+            const registros = JSON.parse(localStorage.getItem('registros')) || [];
+
+            // Referência da tabela
+            const tabela = document.getElementById('tabelaHistorico').getElementsByTagName('tbody')[0];
+
+            // Preenche a tabela com os registros
+            registros.forEach(registro => {
+                const row = tabela.insertRow();
+                row.insertCell(0).textContent = registro.data;
+                row.insertCell(1).textContent = registro.pressao;
+                row.insertCell(2).textContent = registro.peso;
+                row.insertCell(3).textContent = registro.glicemia;
+            });
+        };
+    </script>
+</body>
+</html>

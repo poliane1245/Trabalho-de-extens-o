@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Paciente</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Cadastro de Paciente</h1>
+    <form id="cadastroForm">
+        <label>Nome: <input type="text" name="nome" required></label><br>
+        <label>Idade: <input type="number" name="idade" required></label><br>
+        <label>Contato: <input type="text" name="contato" required></label><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('cadastroForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = form.nome.value;
+            const idade = form.idade.value;
+            const contato = form.contato.value;
+
+            const paciente = { nome, idade, contato };
+            let pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+            pacientes.push(paciente);
+            localStorage.setItem('pacientes', JSON.stringify(pacientes));
+
+            alert('Paciente cadastrado com sucesso!');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
